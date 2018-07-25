@@ -2,16 +2,37 @@
   "name": "payger-merchant-sdk",
   "version": "1.0.0",
   "description": "Payger Merchant API SDK",
-  "main": "config.js",
+  "main": "dist/merchant.js",
   "directories": {
     "lib": "lib"
   },
+  "module": "dist/merchant.mjs",
+  "jsnext:main": "dist/merchant.mjs",
   "scripts": {
-    "test": "test"
+    "prebuild": "eslint lib test",
+    "build": "rollup -c --environment BUILD:production",
+    "watch": "rollup -c -w",
+    "pretest": "rollup -c",
+    "test": "mocha",
+    "prepublish": "BUILD=production npm test"
   },
+  "keywords": [
+    "es6",
+    "modules",
+    "rollup",
+    "bundle",
+    "browser"
+  ],
+  "files": [
+    "lib",
+    "dist"
+  ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependecies": {},
+  "devDependencies": {
+    "eslint": "^5.2.0",
+    "mocha": "^5.2.0",
     "rollup": "^0.63.4"
   }
 }
