@@ -6,17 +6,17 @@ export default {
         }
     ], balances: [
         {
-            url: "/api/v1/api/v1/merchants/balances",
+            url: "/merchants/balances",
             description: "Get merchant's balance"
         }
     ], currencies: [
         {
-            url: "/api/v1/api/v1/merchants/currencies",
+            url: "/merchants/currencies",
             description: "Get currencies"
         }
     ], exchangeRates: [
         {
-            url: "/api/v1/merchants/exchange-rates",
+            url: "/merchants/exchange-rates",
             description: "Get exchange rates"
         }
 
@@ -28,15 +28,15 @@ export default {
 
     ], payments: [
         {
-            url: "/api/v1/merchants/payments",
+            url: "/merchants/payments",
             description: "Gets all payment requests for a merchant"
         }, {
-            url: "/api/v1/merchants/payments/{id}/address",
+            url: "/merchants/payments/{id}/address",
             description: "Adds a new address to an existing payment"
         }  
     ], transactions: [
         {
-            url: "/api/v1/merchants/transactions",
+            url: "/merchants/transactions",
             description: "Gets all transactions for a merchant"
         }
     ]

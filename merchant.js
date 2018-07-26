@@ -14,7 +14,7 @@ export default class Merchant {
 		this.request = new Request();
 		this.config = new Config(url, oauth2);
 		this.tokenManager = new TokenManager(this.request, this.config, basicAuth);
-
+		this.tokenData = null;
 		this.actions = {
 			getBalances: "GET_BALANCES",
 			getCurrencies: "GET_CURRENCIES",
@@ -40,20 +40,20 @@ export default class Merchant {
 		}
 	}
 
-	async getToken() {
-		if(!this.tokenManager.isGeneratedToken()) {
-			return await this.tokenManager.generateNewToken(this.config.oauth2.apiKey, this.config.oauth2.apiSecret);
+	async loadAndVerifyToken() {
+		if(!this.tokenManager.isGeneratedToken(this.tokenData)) {
+			this.tokenData = await this.tokenManager.generateNewToken(this.config.oauth2.apiKey, this.config.oauth2.apiSecret);
 		} else {
-			if(this.tokenManager.checkIfTokenExpired()) {
-				return await this.tokenManager.generateRefreshedToken(this.config.oauth2.apiKey, this.config.oauth2.apiSecret);
+			if(this.tokenManager.checkIfTokenExpired(this.tokenData)) {
+				this.tokenData = await this.tokenManager.generateRefreshedToken(this.config.oauth2.apiKey, this.config.oauth2.apiSecret);
 			}
 		}
 	}
 
 	async call(action, data = null) {
 
-		const currentTokenData = await this.getToken();
-		const currentToken = currentTokenData.token;
+		await this.loadAndVerifyToken();
+		const currentToken = this.tokenData.token;
 		
 		switch(action) {
 			case this.actions.getBalances: return this.processors.balances.getBalances(currentToken);  

@@ -1,4 +1,5 @@
 import Merchant from "../merchant";
+import { expect } from 'chai';
 
 var url = "http://merchant-api-test.payger.com/api/v1";
 
@@ -16,7 +17,8 @@ describe("balances", function() {
 	it("Get balances", function() {
 		const merchant = new Merchant(url, oauth2, basicAuth);
 		merchant.call("GET_BALANCES").then(function(response) {
-			console.info(response);
+			expect(response.content).to.be.an('array');
+			expect(response.content).to.be.not.equal(0);
 		});
 		
 	});
