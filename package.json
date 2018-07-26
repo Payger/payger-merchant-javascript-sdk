@@ -13,7 +13,7 @@
     "build": "rollup -c --environment BUILD:production",
     "watch": "rollup -c -w",
     "pretest": "rollup -c",
-    "test": "mocha",
+    "test": "mocha --require reify test",
     "prepublish": "BUILD=production npm test"
   },
   "keywords": [
@@ -31,8 +31,13 @@
   "license": "ISC",
   "dependecies": {},
   "devDependencies": {
+    "base-64": "^0.1.0",
+    "es6-promise": "^4.2.4",
     "eslint": "^5.2.0",
+    "isomorphic-fetch": "^2.2.1",
     "mocha": "^5.2.0",
-    "rollup": "^0.63.4"
+    "reify": "^0.16.4",
+    "rollup": "^0.63.4",
+    "qs": "^6.5.2"
   }
 }
