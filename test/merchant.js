@@ -178,7 +178,7 @@ describe("merchant", function() {
 			}
 		};
 		console.info("UPDATING....");
-		await merchant.call(actions.updatePayment, payment.id, update).then(function(response) {
+		await merchant.call(actions.updatePayment, { id: payment.id, values: update }).then(function(response) {
 			console.info(response);
 		});
 		console.info("DELETING....");
