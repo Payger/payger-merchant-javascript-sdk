@@ -21,6 +21,7 @@ export default class Merchant {
 			getCurrency: "GET_CURRENCY",
 			getExchangeRate: "GET_EXCHANGERATES", 
 			getPaymentLimits: "GET_PAYMENTLIMITS",
+			getAllTransactions: "GET_ALLTRANSACTIONS",
 			getTransactions: "GET_TRANSACTIONS",
 			getTransaction: "GET_TRANSACTION",
 			getPayments: "GET_PAYMENTS",
@@ -29,7 +30,7 @@ export default class Merchant {
 			updatePayment: "UPDATE_PAYMENT",
 			cancelPayment: "CANCEL_PAYMENT",
 			addAddress: "ADD_ADDRESS"
-		}
+		};
 		this.processors = {
 			balances: new Balances(this.request, this.config),
 			currencies: new Currencies(this.request, this.config),
@@ -37,7 +38,7 @@ export default class Merchant {
 			paymentLimits: new PaymentLimits(this.request, this.config),
 			transactions: new Transactions(this.request, this.config),
 			payments: new Payments(this.request, this.config)
-		}
+		};
 	}
 
 	async loadAndVerifyToken() {
@@ -61,6 +62,7 @@ export default class Merchant {
 			case this.actions.getCurrency: return this.processors.currencies.getCurrency(currentToken, data);  
 			case this.actions.getExchangeRate: return this.processors.exchangeRate.getExchangeRates(currentToken, data);  
 			case this.actions.getPaymentLimits: return this.processors.paymentLimits.getPaymentLimits(currentToken, data);
+			case this.actions.getAllTransactions: return this.processors.transactions.getAllTransactions(currentToken);
 			case this.actions.getTransactions: return this.processors.transactions.getTransactions(currentToken, data);
 			case this.actions.getTransaction: return this.processors.transactions.getTransaction(currentToken, data);
 			case this.actions.getPayments: return this.processors.payments.getPayments(currentToken, data);

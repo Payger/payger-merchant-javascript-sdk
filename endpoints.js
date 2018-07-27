@@ -22,7 +22,7 @@ export default {
 
     ], paymentLimits: [
         {
-            url: "/api/v21/merchants/payment-limits/{inputCurrency}/{outputCurrency}",
+            url: "/merchants/payment-limits",
             description: "Get payment limit for a specified currency"
         }
 
