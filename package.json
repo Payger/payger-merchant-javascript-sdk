@@ -13,7 +13,7 @@
     "build": "rollup -c --environment BUILD:production",
     "watch": "rollup -c -w",
     "pretest": "rollup -c",
-    "test": "mocha --require reify --timeout 10000 test",
+    "test": "mocha --require reify --timeout 100000 test",
     "prepublish": "BUILD=production npm test"
   },
   "keywords": [

@@ -50,6 +50,55 @@ const paginationOptionsPayments = {
 	sort: "created,desc"
 };
 
+function guid() {
+	function s4() {
+	  return Math.floor((1 + Math.random()) * 0x10000)
+		.toString(16)
+		.substring(1);
+	}
+	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4();
+}
+
+const externalId = guid();
+
+const payment = {
+	"externalId": externalId,
+	"description": "description",
+	"inputCurrency": "BTC",
+	"outputCurrency": "USD",
+	"source": "string",
+	"outputAmount": "3",
+	"buyerName": "buyer",
+	"buyerEmailAddress" : "test@test.com",
+	"ipAddress": "10.10.10.1",
+	"latitude": "",
+	"longitude": "-11.585274",
+	"callback" : {
+		"url" : "http://demo.com",
+		"method" : "POST",
+		"params" : {
+			"orderID": "57B25E6B-A877-4102-ADC5-473A9E701ED5"
+		}
+	},
+	"metadata" :  {
+		"a" : "b"
+	}
+};
+
+const update = {
+	"externalId": externalId,
+	"description" : "desc",
+	"metadata" :  {
+		"aaa" : "bbb"
+	}
+};
+
+const address = {
+    "inputCurrency": "BTC",
+	"outputCurrency": "USD",
+	"outputAmount": "0.000024"
+};
+
 
 describe("merchant", function() {
 	it("Get balances", async function() {
@@ -132,65 +181,29 @@ describe("merchant", function() {
 			expect(response.content).to.be.not.equal(0);
 		});
 	});
-	it("Save Payment", async function() {
-		const payment = {
-				"externalId": "aext12342325d233323sffdsf",
-				"description": "description",
-				"inputCurrency": "BTC",
-				"outputCurrency": "USD",
-				"source": "string",
-				"outputAmount": "0.003",
-				"buyerName": "buyer",
-				"buyerEmailAddress" : "test@test.com",
-				"ipAddress": "10.10.10.1",
-				"latitude": "",
-				"longitude": "-11.585274",
-				"callback" : {
-					"url" : "http://demo.com",
-					"method" : "POST",
-					"params" : {
-						"orderID": "57B25E6B-A877-4102-ADC5-473A9E701ED5"
-					}
-				},
-				"metadata" :  {
-					"a" : "b"
-				}
-		};
+	it("Save Payment & Get & add address & update & cancel it", async function() {
+		
+		const contentCreated = await merchant.call(actions.savePayment, JSON.stringify(payment)).then(function(response) {
+			expect(response.content.externalId).to.be.equal(externalId);
+			return response.content;
+		});
+
+		await merchant.call(actions.getPayment, contentCreated.id).then(function(response) {
+			expect(response.content.id).to.be.equal(contentCreated.id);
+		});
+
+		await merchant.call(actions.addAddress, { id: contentCreated.id, address: JSON.stringify(address) }).then(function(response) {
+			expect(response.content.id).to.be.equal(contentCreated.id);
+		});
+
+		await merchant.call(actions.updatePayment, { id: contentCreated.id, values: JSON.stringify(update) }).then(function(response) {
+			expect(response.content.id).to.be.equal(contentCreated.id);
+		});
+
+		await merchant.call(actions.cancelPayment, contentCreated.id).then(function(response) {
+			expect(response.content.id).to.be.equal(contentCreated.id);
+		});
+
+	});
 	
-		await merchant.call(actions.savePayment, JSON.stringify(payment)).then(function(response) {
-			console.info("Response from saving payment -----> " + response);
-		});
-	});
-
-	it("Get Payment & update & cancel it", async function() {
-		const payments = await merchant.call(actions.getPayments, paginationOptionsFilteredStatusPending);
-		const payment = payments.content[0];
-		console.info("GETTING...." + payment.id + " ---> " + payment.status + "-- external id -----> " + payment.externalId);
-		await merchant.call(actions.getPayment, payment.id).then(function(response) {
-			expect(response.content.id).to.be.equal(payment.id);
-		});
-
-		const update = {
-			"externalId": "ext4543422id11233244232424435435",
-			"description" : "desc",
-			"metadata" :  {
-				"aaa" : "bbb"
-			}
-		};
-		console.info("UPDATING....");
-		await merchant.call(actions.updatePayment, { id: payment.id, values: update }).then(function(response) {
-			console.info(response);
-		});
-		console.info("DELETING....");
-		/*await merchant.call(actions.cancelPayment, payment.id).then(function(response) {
-			console.info(response);
-		});*/
-	});
-
-	/*
-	it("Add Address", async function() {
-		await merchant.call(actions.addAddress, "transaction1").then(function(response) {
-			console.info(response);
-		});
-	});*/
 });
