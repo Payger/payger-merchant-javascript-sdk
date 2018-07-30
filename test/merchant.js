@@ -37,13 +37,6 @@ const paginationOptions = {
 	size: 10
 };
 
-const paginationOptionsFilteredStatusPending = {
-	status: "PENDING",
-	page: 0,
-	size: 10
-};
-
-
 const paginationOptionsPayments = {
 	page: 1,
 	size: 10,
@@ -52,11 +45,11 @@ const paginationOptionsPayments = {
 
 function guid() {
 	function s4() {
-	  return Math.floor((1 + Math.random()) * 0x10000)
-		.toString(16)
-		.substring(1);
+		return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
 	}
-	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4();
+	return s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4();
 }
 
 const externalId = guid();
@@ -94,7 +87,7 @@ const update = {
 };
 
 const address = {
-    "inputCurrency": "BTC",
+	"inputCurrency": "BTC",
 	"outputCurrency": "USD",
 	"outputAmount": "0.000024"
 };
