@@ -69,7 +69,8 @@ const actions = {
 	getPayment: "GET_PAYMENT", // get a specific payment
 	updatePayment: "UPDATE_PAYMENT", // update a specific payment
 	cancelPayment: "CANCEL_PAYMENT", // cancel a specific payment
-	addAddress: "ADD_ADDRESS" // add an address to payment
+	addAddress: "ADD_ADDRESS", // add an address to payment
+	getFees: "GET_FEES", // get Fees
 };
 ```
 
@@ -112,14 +113,14 @@ None
 
 ##### Get Exchange Rates
 ```js
- from: String 
+ productCurrency: String 
     - specific currency (I.E.: DASH)
     - Nullable: false
   amount: integer 
     - Nullable: false
   applyLimits: boolean
     - Nullable: true
-  to: string
+  paymentCurrencies: string
     - specific currency (I.E.: DASH)
     - Nullable: true
 ```
@@ -169,10 +170,10 @@ None
     payment = {
         externalId: string,
         description: string,
-        inputCurrency: string,
-        outputCurrency: string,
+        paymentCurrency: string,
+        productCurrency: string,
         source: string,
-        outputAmount: float,
+        productAmount: float,
         buyerName: string,
         buyerEmailAddress : string,
         ipAddress: string,
@@ -227,10 +228,22 @@ None
         id: integer 
             - Nullable: false  
         address: { 
-            inputCurrency: string,
-            outputCurrency: string,
-            outputAmount: string
+            paymentCurrency: string,
+            productCurrency: string,
+            productAmount: string
         }
+    }
+    - Nullable: false
+```
+
+##### Get Fees
+```js
+  feeRequest = { 
+            paymentCurrency: string,
+            productCurrency: string,
+            productAmount: string
+        }
+        
     }
     - Nullable: false
 ```

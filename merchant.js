@@ -7,6 +7,7 @@ import Payments from './lib/payments';
 import Transactions from './lib/transactions';
 import TokenManager from './lib/tokenmanager';
 import Request  from "./lib/request";
+import Fees  from "./lib/fees";
 
 export default class Merchant {
 
@@ -29,7 +30,8 @@ export default class Merchant {
 			getPayment: "GET_PAYMENT",
 			updatePayment: "UPDATE_PAYMENT",
 			cancelPayment: "CANCEL_PAYMENT",
-			addAddress: "ADD_ADDRESS"
+			addAddress: "ADD_ADDRESS",
+            getFees: "GET_FEES",
 		};
 		this.processors = {
 			balances: new Balances(this.request, this.config),
@@ -37,7 +39,8 @@ export default class Merchant {
 			exchangeRate: new ExchangeRate(this.request, this.config),
 			paymentLimits: new PaymentLimits(this.request, this.config),
 			transactions: new Transactions(this.request, this.config),
-			payments: new Payments(this.request, this.config)
+			payments: new Payments(this.request, this.config),
+			fees: new Fees(this.request, this.config),
 		};
 	}
 
@@ -71,6 +74,7 @@ export default class Merchant {
 			case this.actions.updatePayment: return this.processors.payments.updatePayment(currentToken, data);
 			case this.actions.cancelPayment: return this.processors.payments.cancelPayment(currentToken, data);
 			case this.actions.addAddress: return this.processors.payments.addAddress(currentToken, data);
+			case this.actions.getFees: return this.processors.fees.getFees(currentToken, data);
 		}
 	}
 
