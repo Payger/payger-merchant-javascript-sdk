@@ -39,5 +39,10 @@ export default {
             url: "/merchants/transactions",
             description: "Gets all transactions for a merchant"
         }
+    ], fees: [
+        {
+            url: "/merchants/fees",
+            description: "Gets fees"
+        }
     ]
 }
