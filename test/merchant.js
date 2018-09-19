@@ -1,7 +1,7 @@
 import Merchant from "../merchant";
 import { expect } from "chai";
 
-const url = "http://merchant-api-test.payger.com/api/v1";
+const environment = "test";
 
 const oauth2 = {
 	apiKey: "2e5f36c374367fb1b28ba2d884e087d7fb5a6abf21e65a7d370b407b309514fd",
@@ -31,7 +31,7 @@ const actions = {
 	getFees: "GET_FEES",
 };
 
-const merchant = new Merchant(url, oauth2, basicAuth);
+const merchant = new Merchant(environment, oauth2, basicAuth);
 
 const paginationOptions = {
 	page: 1,
@@ -98,7 +98,6 @@ const feeRequest = {
     "productCurrency":"USD",
     "productAmount":"0.15"
 };
-
 
 describe("merchant", function() {
 	it("Get balances", async function() {

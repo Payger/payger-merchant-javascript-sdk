@@ -11,9 +11,9 @@ import Fees  from "./lib/fees";
 
 export default class Merchant {
 
-	constructor(url, oauth2, basicAuth) {
+	constructor(env, oauth2, basicAuth) {
 		this.request = new Request();
-		this.config = new Config(url, oauth2);
+		this.config = new Config(env, oauth2);
 		this.tokenManager = new TokenManager(this.request, this.config, basicAuth);
 		this.tokenData = null;
 		this.actions = {
