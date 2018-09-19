@@ -28,7 +28,7 @@ const actions = {
 	updatePayment: "UPDATE_PAYMENT",
 	cancelPayment: "CANCEL_PAYMENT",
 	addAddress: "ADD_ADDRESS",
-    getFees: "GET_FEES",
+	getFees: "GET_FEES",
 };
 
 const merchant = new Merchant(url, oauth2, basicAuth);
