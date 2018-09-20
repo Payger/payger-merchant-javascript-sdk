@@ -28,7 +28,7 @@ You can also usee it within the browser, install via npm and use the ```merchant
 Import the library in your code, and then start a new merchant to get new communication:
 
 ```js
-const merchant = new Merchant(url, oauth2, basicAuth);
+const merchant = new Merchant(environment, oauth2, basicAuth);
 ```
 
 For reference here is described how to start oauth2 and basic authentication:
