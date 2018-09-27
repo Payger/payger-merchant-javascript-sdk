@@ -13,14 +13,7 @@ Javascript SDK to easily connect to Payger Merchant API.
 
 ``` Merchant SDK ``` is available on [npm](https://www.npmjs.com/merchantsdk). To install it try:
 ```
-$ npm install merchant-sdk
-```
-
-### Browsers
-
-You can also usee it within the browser, install via npm and use the ```merchant-sdk.js``` file found within the download. For example:
-```html
-<script src="./node_modules/merchant-sdk/merchant.js"></script>
+$ npm install payger-merchant-sdk
 ```
 
 ## Usage
@@ -30,6 +23,8 @@ Import the library in your code, and then start a new merchant to get new commun
 ```js
 const merchant = new Merchant(environment, oauth2, basicAuth);
 ```
+You need to specify the environment (test or production). 
+
 
 For reference here is described how to start oauth2 and basic authentication:
 
@@ -46,8 +41,6 @@ const basicAuth = {
 };
 
 ```
-You may to specify environment too (sandbox or production), and for that you'll use ```js url ```. 
-
 
 ### Services available
 

@@ -17,7 +17,7 @@ const actions = {
 	getBalances: "GET_BALANCES",
 	getCurrencies: "GET_CURRENCIES",
 	getCurrency: "GET_CURRENCY",
-	getExchangeRate: "GET_EXCHANGERATES", 
+	getExchangeRate: "GET_EXCHANGERATES",
 	getPaymentLimits: "GET_PAYMENTLIMITS",
 	getAllTransactions: "GET_ALLTRANSACTIONS",
 	getTransactions: "GET_TRANSACTIONS",
@@ -88,15 +88,15 @@ const update = {
 };
 
 const address = {
-    "paymentCurrency":"BTC",
-    "productCurrency":"USD",
-    "productAmount":"0.00001"
+	"paymentCurrency":"BTC",
+	"productCurrency":"USD",
+	"productAmount":"0.00001"
 };
 
 const feeRequest = {
-    "paymentCurrency":"BTC",
-    "productCurrency":"USD",
-    "productAmount":"0.15"
+	"paymentCurrency":"BTC",
+	"productCurrency":"USD",
+	"productAmount":"0.15"
 };
 
 describe("merchant", function() {
@@ -137,7 +137,7 @@ describe("merchant", function() {
 	
 	it("Get exchange rates with filter", async function() {
 		await merchant.call(actions.getExchangeRate, { productCurrency: "USD", amount: 10, applyLimits: true, paymentCurrencies: null}).then(function(response) {
-       		expect(response.content.rates).to.be.an("array");
+			expect(response.content.rates).to.be.an("array");
 			expect(response.content.rates).to.be.not.equal(0);
 		});
 	});
@@ -149,14 +149,14 @@ describe("merchant", function() {
 	});
 	it("Get all transactions", async function() {
 		await merchant.call(actions.getAllTransactions, paginationOptions).then(function(response) {
-            expect(response.content).to.be.an("array");
+			expect(response.content).to.be.an("array");
 			expect(response.content).to.be.not.equal(0);
 		});
 	});
 	
 	it("Get transactions paginated", async function() {
 		await merchant.call(actions.getTransactions, paginationOptions).then(function(response) {
-            expect(response).to.be.not.equal(null);
+			expect(response).to.be.not.equal(null);
 			expect(response).to.be.not.equal(undefined);
 			expect(response.content).to.be.an("array");
 			expect(response.content).to.be.not.equal(0);
@@ -191,12 +191,12 @@ describe("merchant", function() {
 		});
 
 		await merchant.call(actions.addAddress, { id: contentCreated.id, address: JSON.stringify(address) }).then(function(response) {
-         	expect(response.content.id).to.be.equal(contentCreated.id);
+			expect(response.content.id).to.be.equal(contentCreated.id);
 		});
 
-        await merchant.call(actions.getPayment, contentCreated.id).then(function(response) {
-            expect(response.content.id).to.be.equal(contentCreated.id);
-        });
+		await merchant.call(actions.getPayment, contentCreated.id).then(function(response) {
+			expect(response.content.id).to.be.equal(contentCreated.id);
+		});
 
 		await merchant.call(actions.updatePayment, { id: contentCreated.id, values: JSON.stringify(update) }).then(function(response) {
 			expect(response.content.id).to.be.equal(contentCreated.id);
@@ -208,12 +208,12 @@ describe("merchant", function() {
 
 	});
 
-    it("Get Fees", async function() {
-        await merchant.call(actions.getFees, JSON.stringify(feeRequest)).then(function(response) {
-            expect(response).to.be.not.equal(null);
-            expect(response.feeInPaymentCurrency).to.be.not.equal(null);
-            expect(response.feeInProductCurrency).to.be.not.equal(null);
-        });
-    });
+	it("Get Fees", async function() {
+		await merchant.call(actions.getFees, JSON.stringify(feeRequest)).then(function(response) {
+			expect(response).to.be.not.equal(null);
+			expect(response.feeInPaymentCurrency).to.be.not.equal(null);
+			expect(response.feeInProductCurrency).to.be.not.equal(null);
+		});
+	});
 	
 });
