@@ -23,6 +23,7 @@ Import the library in your code, and then start a new merchant to get new commun
 ```js
 const merchant = new Merchant(environment, oauth2, basicAuth);
 ```
+
 You need to specify the environment (test or production). 
 
 
