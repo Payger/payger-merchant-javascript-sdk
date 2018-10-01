@@ -7,6 +7,8 @@ Welcome to our merchant sdk github tutorial.
 
 Javascript SDK to easily connect to Payger Merchant API.
 
+[Here can find the API documentation.](https://developers.payger.com) 
+
 ## Instalation
 
 ### Node.js
