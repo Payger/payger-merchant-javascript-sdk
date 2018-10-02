@@ -1,6 +1,6 @@
 {
   "name": "payger-merchant-javascript-sdk",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Payger Merchant Javascript API SDK",
   "main": "dist/merchant.js",
   "directories": {

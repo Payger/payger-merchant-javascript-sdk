@@ -1,7 +1,7 @@
 [![PAYGER - Merchant SDK](https://pbs.twimg.com/profile_images/955418197758496768/y12odzJe_400x400.jpg)](https://github.com/)
-#  PAYGER - Merchant SDK
+#  PAYGER - Merchant Javascript SDK
 
-Welcome to our merchant sdk github tutorial.
+Welcome to our merchant sdk tutorial.
 
 ## What is this SDK?
 
@@ -13,9 +13,9 @@ Javascript SDK to easily connect to Payger Merchant API.
 
 ### Node.js
 
-``` Merchant SDK ``` is available on [npm](https://www.npmjs.com/merchantsdk). To install it try:
+``` Merchant Javascript SDK ``` is available on [npm](https://www.npmjs.com/package/payger-merchant-javascript-sdk). To install it try:
 ```
-$ npm install payger-merchant-sdk
+$ npm payger-merchant-javascript-sdk
 ```
 
 ## Usage
